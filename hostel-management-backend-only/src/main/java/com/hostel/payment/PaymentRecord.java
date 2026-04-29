@@ -1,5 +1,6 @@
 package com.hostel.payment;
 
+import com.hostel.common.PaymentStatus;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,9 +12,12 @@ public class PaymentRecord {
     private Long id;
 
     private String studentName;
+    private String studentEmail;
     private Double amount;
     private String dueDate;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
 
     public PaymentRecord() {
     }
@@ -34,6 +38,14 @@ public class PaymentRecord {
         this.studentName = studentName;
     }
 
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
     public Double getAmount() {
         return amount;
     }
@@ -50,11 +62,11 @@ public class PaymentRecord {
         this.dueDate = dueDate;
     }
 
-    public String getStatus() {
+    public PaymentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(PaymentStatus status) {
         this.status = status;
     }
 }

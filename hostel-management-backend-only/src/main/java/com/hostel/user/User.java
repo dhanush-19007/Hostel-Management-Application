@@ -1,5 +1,6 @@
 package com.hostel.user;
 
+import com.hostel.common.AllocationStatus;
 import com.hostel.common.Role;
 import jakarta.persistence.*;
 
@@ -23,6 +24,21 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @Column(nullable = false)
+    private boolean firstLogin = true;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AllocationStatus allocationStatus = AllocationStatus.NOT_ALLOCATED;
+
+    private String allocatedRoomNumber;
+    private String allocatedBlock;
+    private Integer allocatedFloor;
+    private String roommatePreference;
+    private String preferredRoomType;
+    private Integer preferredFloor;
+    private String specialPreference;
 
     public User() {
     }
@@ -65,5 +81,77 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+
+    public AllocationStatus getAllocationStatus() {
+        return allocationStatus;
+    }
+
+    public void setAllocationStatus(AllocationStatus allocationStatus) {
+        this.allocationStatus = allocationStatus;
+    }
+
+    public String getAllocatedRoomNumber() {
+        return allocatedRoomNumber;
+    }
+
+    public void setAllocatedRoomNumber(String allocatedRoomNumber) {
+        this.allocatedRoomNumber = allocatedRoomNumber;
+    }
+
+    public String getAllocatedBlock() {
+        return allocatedBlock;
+    }
+
+    public void setAllocatedBlock(String allocatedBlock) {
+        this.allocatedBlock = allocatedBlock;
+    }
+
+    public Integer getAllocatedFloor() {
+        return allocatedFloor;
+    }
+
+    public void setAllocatedFloor(Integer allocatedFloor) {
+        this.allocatedFloor = allocatedFloor;
+    }
+
+    public String getRoommatePreference() {
+        return roommatePreference;
+    }
+
+    public void setRoommatePreference(String roommatePreference) {
+        this.roommatePreference = roommatePreference;
+    }
+
+    public String getPreferredRoomType() {
+        return preferredRoomType;
+    }
+
+    public void setPreferredRoomType(String preferredRoomType) {
+        this.preferredRoomType = preferredRoomType;
+    }
+
+    public Integer getPreferredFloor() {
+        return preferredFloor;
+    }
+
+    public void setPreferredFloor(Integer preferredFloor) {
+        this.preferredFloor = preferredFloor;
+    }
+
+    public String getSpecialPreference() {
+        return specialPreference;
+    }
+
+    public void setSpecialPreference(String specialPreference) {
+        this.specialPreference = specialPreference;
     }
 }

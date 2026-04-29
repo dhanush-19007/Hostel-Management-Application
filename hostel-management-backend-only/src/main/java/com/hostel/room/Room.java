@@ -10,10 +10,23 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String roomNumber;
+
+    @Column(nullable = false)
     private Integer capacity;
+
+    @Column(nullable = false)
     private Integer occupancy;
+
+    @Column(nullable = false)
     private String blockName;
+
+    @Column(nullable = false)
+    private Integer floorNumber;
+
+    @Column(nullable = false)
+    private String roomType;
 
     public Room() {
     }
@@ -56,5 +69,21 @@ public class Room {
 
     public void setBlockName(String blockName) {
         this.blockName = blockName;
+    }
+
+    public Integer getFloorNumber() {
+        return floorNumber;
+    }
+
+    public void setFloorNumber(Integer floorNumber) {
+        this.floorNumber = floorNumber;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
     }
 }

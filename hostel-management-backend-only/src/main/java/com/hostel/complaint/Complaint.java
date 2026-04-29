@@ -12,6 +12,8 @@ public class Complaint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String studentEmail;
+    private String studentName;
     private String title;
 
     @Column(length = 2000)
@@ -35,6 +37,22 @@ public class Complaint {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public String getTitle() {

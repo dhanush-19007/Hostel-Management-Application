@@ -19,7 +19,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> register(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<Map<String, Object>> register(@RequestBody RegisterRequest request) {
+        System.out.println("REGISTER HIT");
+        System.out.println(request.getFullName());
+        System.out.println(request.getEmail());
+        System.out.println(request.getPassword());
+        System.out.println(request.getRole());
         return ResponseEntity.ok(authService.register(request));
     }
 

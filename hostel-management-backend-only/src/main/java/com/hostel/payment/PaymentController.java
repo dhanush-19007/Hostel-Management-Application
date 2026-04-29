@@ -1,12 +1,12 @@
 package com.hostel.payment;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class PaymentController {
 
     private final PaymentService paymentService;
@@ -15,13 +15,13 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("/api/student/payments")
-    public ResponseEntity<List<PaymentRecord>> getStudentPayments() {
-        return ResponseEntity.ok(paymentService.getAllPayments());
+    @GetMapping("/student/payments")
+    public ResponseEntity<List<PaymentRecord>> getStudentPayments(@RequestParam String email) {
+        return ResponseEntity.ok(paymentService.getPaymentsByStudentEmail(email));
     }
 
-    @GetMapping("/api/admin/payments")
-    public ResponseEntity<List<PaymentRecord>> getAdminPayments() {
+    @GetMapping("/staff/payments")
+    public ResponseEntity<List<PaymentRecord>> getStaffPayments() {
         return ResponseEntity.ok(paymentService.getAllPayments());
     }
 }

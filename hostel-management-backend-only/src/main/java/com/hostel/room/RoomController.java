@@ -1,6 +1,6 @@
 package com.hostel.room;
 
-import com.hostel.room.dto.RoomRequestDto;
+import com.hostel.room.dto.RoomPreferenceRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class RoomController {
 
     private final RoomService roomService;
@@ -16,26 +17,18 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/api/admin/rooms")
+    @GetMapping("/admin/rooms")
     public ResponseEntity<List<Room>> getRooms() {
         return ResponseEntity.ok(roomService.getAllRooms());
     }
 
-    @PostMapping("/api/student/room-requests")
-    public ResponseEntity<Map<String, Object>> requestRoom(@RequestBody RoomRequestDto requestDto) {
-        RoomRequestEntity saved = roomService.createRoomRequest(requestDto);
-        return ResponseEntity.ok(Map.of(
-                "message", "Room request submitted successfully",
-                "id", saved.getId(),
-                "roomType", saved.getRoomType(),
-                "block", saved.getBlockName(),
-                "preference", saved.getPreference(),
-                "status", saved.getStatus()
-        ));
+    @PostMapping("/student/room-preferences")
+    public ResponseEntity<Map<String, Object>> allocateRoom(@RequestBody RoomPreferenceRequest request) {
+        return ResponseEntity.ok(roomService.allocateRoom(request));
     }
 
-    @GetMapping("/api/student/room-requests")
-    public ResponseEntity<List<RoomRequestEntity>> studentRequests() {
-        return ResponseEntity.ok(roomService.getAllRoomRequests());
+    @GetMapping("/student/room-details")
+    public ResponseEntity<Map<String, Object>> getStudentRoomDetails(@RequestParam String email) {
+        return ResponseEntity.ok(roomService.getStudentRoomDetails(email));
     }
 }

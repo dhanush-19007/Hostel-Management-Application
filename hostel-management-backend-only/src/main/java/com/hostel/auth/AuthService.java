@@ -4,7 +4,6 @@ import com.hostel.auth.dto.LoginRequest;
 import com.hostel.auth.dto.RegisterRequest;
 import com.hostel.user.User;
 import com.hostel.user.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +14,11 @@ import java.util.Map;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Map<String, Object> register(RegisterRequest request) {
@@ -40,6 +40,8 @@ public class AuthService {
         response.put("fullName", savedUser.getFullName());
         response.put("email", savedUser.getEmail());
         response.put("role", savedUser.getRole());
+        response.put("firstLogin", savedUser.isFirstLogin());
+        response.put("allocationStatus", savedUser.getAllocationStatus());
         return response;
     }
 
@@ -55,8 +57,14 @@ public class AuthService {
         response.put("message", "Login successful");
         response.put("token", "sample-jwt-token");
         response.put("id", user.getId());
+        response.put("fullName", user.getFullName());
         response.put("email", user.getEmail());
         response.put("role", user.getRole());
+        response.put("firstLogin", user.isFirstLogin());
+        response.put("allocationStatus", user.getAllocationStatus());
+        response.put("allocatedRoomNumber", user.getAllocatedRoomNumber());
+        response.put("allocatedBlock", user.getAllocatedBlock());
+        response.put("allocatedFloor", user.getAllocatedFloor());
         return response;
     }
 }

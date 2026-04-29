@@ -16,4 +16,8 @@ public class PaymentService {
     public List<PaymentRecord> getAllPayments() {
         return paymentRepository.findAll();
     }
+
+    public List<PaymentRecord> getPaymentsByStudentEmail(String studentEmail) {
+        return paymentRepository.findByStudentEmail(studentEmail);
+    }
 }
